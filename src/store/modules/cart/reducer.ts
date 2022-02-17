@@ -14,15 +14,37 @@ const cart: Reducer<CartStateProps> = (state = INITIAL_STATE, action) => {
         {
           const { product } = action.payload;
 
-          console.log(product);
+          const productInCartIndex = draft.items.findIndex(
+            (item) => item.product.id === product.id
+          );
 
-          draft.items.push({
-            product,
-            quantity: 1,
-          });
+          if (productInCartIndex >= 0) {
+            draft.items[productInCartIndex].quantity++;
+          } else {
+            draft.items.push({
+              product,
+              quantity: 1,
+            });
+          }
         }
 
         break;
+
+      case "REMOVE_PRODUCT_TO_CART": {
+        const { product } = action.payload;
+
+        const productInCartIndex = draft.items.findIndex(
+          (item) => item.product.id === product.id
+        );
+
+        if (productInCartIndex >= 0) {
+          if (draft.items[productInCartIndex].quantity >= 1) {
+            draft.items[productInCartIndex].quantity--;
+          }
+        }
+
+        break;
+      }
 
       default: {
         return draft;

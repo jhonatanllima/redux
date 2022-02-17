@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 import api from "../../services/api";
 import { addProductToCart } from "../../store/modules/cart/actions";
+import { removeProductToCart } from "../../store/modules/cart/actions";
 
 import { ProductsProps } from "../../store/modules/cart/types/products";
 
@@ -23,6 +24,13 @@ export function Catalog() {
     [dispatch]
   );
 
+  const handleRemoveProductToCart = useCallback(
+    (product: ProductsProps) => {
+      dispatch(removeProductToCart(product));
+    },
+    [dispatch]
+  );
+
   return (
     <main>
       <h1>Catalog</h1>
@@ -33,6 +41,12 @@ export function Catalog() {
           <span>{product.price}</span> {"  "}
           <button type="button" onClick={() => handleAddProductToCart(product)}>
             Comprar
+          </button>
+          <button
+            type="button"
+            onClick={() => handleRemoveProductToCart(product)}
+          >
+            Remover
           </button>
         </article>
       ))}
