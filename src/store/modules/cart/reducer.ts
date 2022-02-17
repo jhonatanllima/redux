@@ -38,7 +38,7 @@ const cart: Reducer<CartStateProps> = (state = INITIAL_STATE, action) => {
         );
 
         if (productInCartIndex >= 0) {
-          if (draft.items[productInCartIndex].quantity >= 1) {
+          if (draft.items[productInCartIndex].quantity > 1) {
             draft.items[productInCartIndex].quantity--;
           }
         }
