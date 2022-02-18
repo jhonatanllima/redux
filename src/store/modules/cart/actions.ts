@@ -9,11 +9,20 @@ export function addProductToCart(product: ProductsProps) {
   };
 }
 
-export function removeProductToCart(product: ProductsProps) {
+export function removeAmountProductToCart(product: ProductsProps) {
+  return {
+    type: "REMOVE_AMOUNT_PRODUCT_TO_CART",
+    payload: {
+      product,
+    },
+  };
+}
+
+export function removeProductToCart(productId: Number) {
   return {
     type: "REMOVE_PRODUCT_TO_CART",
     payload: {
-      product,
+      productId,
     },
   };
 }

@@ -5,6 +5,7 @@ import { StateProps } from "../../store";
 
 import { addProductToCart } from "../../store/modules/cart/actions";
 import { removeProductToCart } from "../../store/modules/cart/actions";
+import { removeAmountProductToCart } from "../../store/modules/cart/actions";
 
 import {
   CartItemProps,
@@ -19,8 +20,15 @@ export function Cart() {
   );
 
   const handleRemoveProductToCart = useCallback(
+    (productId: Number) => {
+      dispatch(removeProductToCart(productId));
+    },
+    [dispatch]
+  );
+
+  const handleRemoveAmountProductToCart = useCallback(
     (product: ProductsProps) => {
-      dispatch(removeProductToCart(product));
+      dispatch(removeAmountProductToCart(product));
     },
     [dispatch]
   );
@@ -51,7 +59,7 @@ export function Cart() {
             <td>
               <button
                 type="button"
-                onClick={() => handleRemoveProductToCart(item.product)}
+                onClick={() => handleRemoveAmountProductToCart(item.product)}
               >
                 -
               </button>
@@ -62,6 +70,15 @@ export function Cart() {
                 onClick={() => handleAddProductToCart(item.product)}
               >
                 +
+              </button>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                onClick={() => handleRemoveProductToCart(item.product.id)}
+              >
+                remover
               </button>
             </td>
           </tr>

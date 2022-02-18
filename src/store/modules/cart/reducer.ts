@@ -30,7 +30,7 @@ const cart: Reducer<CartStateProps> = (state = INITIAL_STATE, action) => {
 
         break;
 
-      case "REMOVE_PRODUCT_TO_CART": {
+      case "REMOVE_AMOUNT_PRODUCT_TO_CART": {
         const { product } = action.payload;
 
         const productInCartIndex = draft.items.findIndex(
@@ -46,6 +46,16 @@ const cart: Reducer<CartStateProps> = (state = INITIAL_STATE, action) => {
         break;
       }
 
+      case "REMOVE_PRODUCT_TO_CART":
+        {
+          const { productId } = action.payload;
+
+          draft.items = draft.items.filter(
+            (itemToRemoved) => itemToRemoved.product.id !== productId
+          );
+        }
+
+        break;
       default: {
         return draft;
       }
