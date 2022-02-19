@@ -8,16 +8,16 @@ import { removeProductToCart } from "../../store/modules/cart/actions";
 import { removeAmountProductToCart } from "../../store/modules/cart/actions";
 
 import {
-  CartItemProps,
   ProductsProps,
 } from "../../store/modules/cart/types/products";
 
 export function Cart() {
   const dispatch = useDispatch();
 
-  const cart = useSelector<StateProps, CartItemProps[]>(
-    (state) => state.cart.items
+  const {cart} = useSelector(
+    (state: StateProps) => state
   );
+
 
   const handleRemoveProductToCart = useCallback(
     (productId: Number) => {
@@ -50,7 +50,7 @@ export function Cart() {
       </thead>
 
       <tbody>
-        {cart.map((item) => (
+        {cart.items.map((item) => (
           <tr key={item.product.id}>
             <td>{item.product.title}</td>
             <td>{item.product.price}</td>
@@ -83,6 +83,8 @@ export function Cart() {
             </td>
           </tr>
         ))}
+
+        <tfoot>{`Total R$ ${cart.total}`}</tfoot>
       </tbody>
     </table>
   );

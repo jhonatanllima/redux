@@ -5,13 +5,19 @@ import { CartStateProps } from "./types/products";
 
 const INITIAL_STATE: CartStateProps = {
   items: [],
+  total: 0,
 };
+
 
 const cart: Reducer<CartStateProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft) => {
+    // function handleTotal () {
+    //   const allProductPrices = draft.items[0].reduce(allPrices => allPrices.product)
+    // }
+
     switch (action.type) {
       case "ADD_PRODUCT_TO_CART":
-        {
+        { 
           const { product } = action.payload;
 
           const productInCartIndex = draft.items.findIndex(

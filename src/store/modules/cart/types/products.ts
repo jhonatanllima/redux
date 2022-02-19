@@ -5,10 +5,11 @@ export interface ProductsProps {
 }
 
 export interface CartItemProps {
-  product: ProductsProps;
   quantity: number;
+  product: ProductsProps;
 }
 
 export interface CartStateProps {
+  total: number;
   items: CartItemProps[];
 }
